@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 Minute Trade - Fast & Secure Over-The-Counter Crypto Exchange</title>
+    <!-- Google Fonts for premium typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- LUXURIOUS BLUE THEME STYLING --- */
+        :root {
+            --bg-deep: #070D1F;
+            --bg-card: #0F1A36;
+            --bg-card-hover: #142247;
+            --primary-blue: #2563EB;
+            --accent-blue: #3B82F6;
+            --accent-glow: rgba(37, 99, 235, 0.25);
+            --text-main: #FFFFFF;
+            --text-muted: #93C5FD;
+            --text-sub: #CBD5E1;
+            --border-color: #1E293B;
+            --whatsapp-color: #25D366;
+            --telegram-color: #0088cc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Subtle Background Glow Effect */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, rgba(7, 13, 31, 0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Sticky Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(7, 13, 31, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .logo-icon-box {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--primary-blue), #1D4ED8);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #fff;
+            box-shadow: 0 4px 14px var(--accent-glow);
+            /* EDIT HERE: Drop your final logo image here when ready: <img src="logo.png" style="width:100%; height:100%; object-fit:contain;" /> */
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: var(--accent-blue);
+        }
+
+        /* Desktop Navigation Links */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-sub);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-blue);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-header-wa {
+            background-color: var(--whatsapp-color);
+            color: #fff;
+            padding: 9px 18px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+        }
+
+        .btn-header-wa:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+        }
+
+        /* Hamburger Toggle Button (Hidden on Desktop) */
+        .hamburger-btn {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Mobile Dropdown Menu */
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: rgba(7, 13, 31, 0.98);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 8%;
+            flex-direction: column;
+            gap: 15px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .mobile-menu a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 70px 20px 40px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .trust-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(37, 99, 235, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .trust-badge-pill i {
+            color: #F59E0B;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #60A5FA, #2563EB);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-sub);
+            margin-bottom: 35px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-main-wa {
+            background-color: var(--whatsapp-color);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            transition: 0.2s;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.25);
+        }
+
+        .btn-main-tg {
+            background-color: var(--telegram-color);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            transition: 0.2s;
+            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.25);
+        }
+
+        .btn-main-wa:hover, .btn-main-tg:hover {
+            transform: translateY(-3px);
+            opacity: 0.95;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin: 50px auto;
+            padding: 25px;
+            max-width: 900px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Major Cryptocurrencies Section */
+        .market-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .coins-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .coin-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coin-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+            background-color: var(--bg-card-hover);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .coin-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .coin-identity {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .coin-icon-symbol {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .coin-titles h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .coin-titles span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .status-badge {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34D399;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .coin-desc {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            margin-bottom: 24px;
+        }
+
+        .card-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .btn-card-action {
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+
+        .btn-card-wa {
+            background: rgba(37, 211, 102, 0.12);
+            color: #25D366;
+            border: 1px solid rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-card-wa:hover {
+            background: var(--whatsapp-color);
+            color: #fff;
+        }
+
+        .btn-card-tg {
+            background: rgba(0, 136, 204, 0.12);
+            color: #0088cc;
+            border: 1px solid rgba(0, 136, 204, 0.3);
+        }
+
+        .btn-card-tg:hover {
+            background: var(--telegram-color);
+            color: #fff;
+        }
+
+        /* Other Currencies Banner Box */
+        .other-currencies-banner {
+            margin-top: 30px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), var(--bg-card));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .banner-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+        }
+
+        .banner-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Rates Reference Box */
+        .rates-ref-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 20px 40px 20px;
+        }
+
+        .ref-inner {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .ref-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ref-left i {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+        }
+
+        .ref-left p {
+            font-size: 0.95rem;
+            color: var(--text-sub);
+        }
+
+        /* EDIT HERE: Modify baseline reference rates anytime */
+        .ref-rates-display {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            background: rgba(255,255,255,0.05);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Features Section */
+        .features-section {
+            background: rgba(15, 26, 54, 0.4);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 80px 20px;
+        }
+
+        .features-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 16px;
+        }
+
+        .feature-icon-box {
+            width: 50px;
+            height: 50px;
+            background: rgba(37, 99, 235, 0.15);
+            color: var(--accent-blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-item h4 {
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+        }
+
+        /* Contact & Footer Section */
+        footer {
+            background: var(--bg-deep);
+            border-top: 1px solid var(--border-color);
+            padding: 70px 20px 30px 20px;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h5 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .footer-col p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-col p i {
+            color: var(--accent-blue);
+            width: 18px;
+        }
+
+        .social-icons-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .social-icon-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-sub);
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .social-icon-btn:hover {
+            background: var(--primary-blue);
+            color: #fff;
+            border-color: var(--primary-blue);
+        }
+
+        .copyright-bar {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Design: Switch to Hamburger Menu on tablets & phones */
+        @media (max-width: 900px) {
+            .nav-menu { display: none; } /* Hide standard desktop menu */
+            .hamburger-btn { display: flex; } /* Show mobile hamburger toggle */
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.3rem; }
+            header { padding: 15px 5%; }
+            .stats-bar { gap: 20px; }
+        }
+    </style>
+</head>
+<body id="home">
+
+    <!-- STICKY HEADER -->
+    <header>
+        <a href="#home" class="logo-container">
+            <div class="logo-icon-box">
+                1M
+            </div>
+            <div class="logo-text">
+                1 MINUTE <span>TRADE</span>
+            </div>
+        </a>
+
+        <!-- DESKTOP NAVIGATION MENU -->
+        <ul class="nav-menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#cryptocurrencies">Cryptocurrencies</a></li>
+            <li><a href="#rates">Rates</a></li>
+            <li><a href="#why-us">Why Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="header-actions">
+            <!-- WhatsApp Quick Button -->
+            <a href="https://wa.me/2348022802004?text=Hello,%20I%20want%20to%20trade" target="_blank" class="btn-header-wa">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.1rem;"></i> Chat Now
+            </a>
+            <!-- HAMBURGER TOGGLE BUTTON FOR MOBILE -->
+            <button class="hamburger-btn" id="hamburgerToggle" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- MOBILE DROPDOWN MENU -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#home" class="mobile-link">Home</a>
+            <a href="#cryptocurrencies" class="mobile-link">Cryptocurrencies</a>
+            <a href="#rates" class="mobile-link">Rates</a>
+            <a href="#why-us" class="mobile-link">Why Us</a>
+            <a href="#contact" class="mobile-link">Contact</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="trust-badge-pill">
+            <i class="fa-solid fa-shield-halved"></i> Over $10M+ Successfully Traded with Zero Complaints
+        </div>
+        <h1>The Fastest & Most Secure Way to Cash Out Your <span>Crypto</span></h1>
+        <p>Experience instant settlements, top-tier privacy, and unbeatable rates. Trade directly with a trusted OTC desk via WhatsApp or Telegram in seconds.</p>
+        
+        <div class="hero-cta-group">
+            <!-- EDIT HERE: Main WhatsApp CTA -->
+            <a href="https://wa.me/2348022802004?text=Hello,%20I%20want%20to%20trade" target="_blank" class="btn-main-wa">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> Trade on WhatsApp
+            </a>
+            <!-- EDIT HERE: Main Telegram CTA -->
+            <a href="https://t.me/One_MinuteTrade" target="_blank" class="btn-main-tg">
+                <i class="fa-brands fa-telegram" style="font-size: 1.2rem;"></i> Trade on Telegram
+            </a>
+        </div>
+    </section>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number">$10M+</div>
+            <div class="stat-label">Total Volume Traded</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">1 Min</div>
+            <div class="stat-label">Average Payout Time</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Secure Escrow</div>
+        </div>
+    </div>
+
+    <!-- MAJOR CRYPTOCURRENCIES SECTION -->
+    <section id="cryptocurrencies" class="market-section">
+        <div class="section-header">
+            <h2>Major Cryptocurrencies</h2>
+            <p>Select your preferred asset below to connect instantly with our trading desk.</p>
+        </div>
+
+        <div class="coins-grid">
+
+            <!-- USDT CARD -->
+            <div class="coin-card">
+                <div class="coin-top">
+                    <div class="coin-identity">
+                        <div class="coin-icon-symbol" style="background: #26A17B;">₮</div>
+                        <div class="coin-titles">
+                            <h3>Tether</h3>
+                            <span>USDT (TRC20 / ERC20)</span>
+                        </div>
+                    </div>
+                    <div class="status-badge"><i class="fa-solid fa-circle" style="font-size: 0.5rem;"></i> Active</div>
+                </div>
+                <p class="coin-desc">The most liquid stablecoin. Instant verification and direct bank payout within 1 minute.</p>
+                <div class="card-actions">
+                    <a href="https://wa.me/2348022802004?text=Hello,%20I%20want%20to%20trade" target="_blank" class="btn-card-action btn-card-wa">
+                        <i class="fa-brands fa-whatsapp"></i> Trade on WhatsApp
+                    </a>
+                    <a href="https://t.me/One_MinuteTrade" target="_blank" class="btn-card-action btn-card-tg">
+                        <i class="fa-brands fa-telegram"></i> Trade on Telegram
+                    </a>
+                </div>
+            </div>
+
+            <!-- USDC CARD -->
+            <div class="coin-card">
+                <div class="coin-top">
+                    <div class="coin-identity">
+                        <div class="coin-icon-symbol" style="background: #2775CA;">$</div>
+                        <div class="coin-titles">
+                            <h3>USD Coin</h3>
+                            <span>USDC</span>
+                        </div>
+                    </div>
+                    <div class="status-badge"><i class="fa-solid fa-circle" style="font-size: 0.5rem;"></i> Active</div>
+                </div>
+                <p class="coin-desc">Fully backed digital dollar. Fast processing with competitive market rates.</p>
+                <div class="card-actions">
+                    <a href="https://wa.me/2348022802004?text=Hello,%20I%20want%20to%20trade" target="_blank" class="btn-card-action btn-card-wa">
+                        <i class="fa-brands fa-whatsapp"></i> Trade on WhatsApp
+                    </a>
+                    <a href="https://t.me/One_MinuteTrade" target="_blank" class="btn-card-action btn-card-tg">
+                        <i class="fa-brands fa-telegram"></i> Trade on Telegram
+                    </a>
+                </div>
+            </div>
+
+            <!-- BITCOIN CARD -->
+            <div class="coin-card">
+                <div class="coin-top">
+                    <div class="coin-identity">
+                        <div class="coin-icon-symbol" style="background: #F7931A;"><i class="fa-brands fa-bitcoin"></i></div>
+                        <div class="coin-titles">
+                            <h3>Bitcoin</h3>
+                            <span>BTC</span>
+                        </div>
+                    </div>
+                    <div class="status-badge"><i class="fa-solid fa-circle" style="font-size: 0.5rem;"></i> Active</div>
+                </div>
+                <p class="coin-desc">The pioneer digital gold. Secure transactions with rapid blockchain confirmation.</p>
+                <div class="card-actions">
+                    <a href="https://wa.me/2348022802004?text=Hello,%20I%20want%20to%20trade" target="_blank" class="btn-card-action btn-card-wa">
+                        <i class="fa-brands fa-whatsapp"></i> Trade on WhatsApp
+                    </a>
+                    <a href="https://t.me/One_MinuteTrade" target="_blank" class="btn-card-action btn-card-tg">
+                        <i class="fa-brands fa-telegram"></i> Trade on Telegram
+                    </a>
+                </div>
+            </div>
+
+            <!-- ETHEREUM CARD -->
+            <div class="coin-card">
+                <div class="coin-top">
+                    <div class="coin-identity">
+                        <div class="coin-icon-symbol" style="background: #627EEA;"><i class="fa-brands fa-ethereum"></i></div>
+                        <div class="coin-titles">
+                            <h3>Ethereum</h3>
+                            <span>ETH</span>
+                        </div>
+                    </div>
+                    <div class="status-badge"><i class="fa-solid fa-circle" style="font-size: 0.5rem;"></i> Active</div>
+                </div>
+                <p class="coin-desc">Powering decentralized applications. Instant settlement and reliable payout.</p>
+                <div class="card-actions">
+                    <a href="https://wa.me/2348022802004?text=Hello,%20I%20want%20to%20trade" target="_blank" class="btn-card-action btn-card-wa">
+                        <i class="fa-brands fa-whatsapp"></i> Trade on WhatsApp
+                    </a>
+                    <a href="https://t.me/One_MinuteTrade" target="_blank" class="btn-card-action btn-card-tg">
+                        <i class="fa-brands fa-telegram"></i> Trade on Telegram
+                    </a>
+                </div>
+            </div>
+
+            <!-- SOLANA CARD -->
+            <div class="coin-card">
+                <div class="coin-top">
+                    <div class="coin-identity">
+                        <div class="coin-icon-symbol" style="background: linear-gradient(135deg, #00FFA3, #DC1FFF);">SOL</div>
+                        <div class="coin-titles">
+                            <h3>Solana</h3>
+                            <span>SOL</span>
+                        </div>
+                    </div>
+                    <div class="status-badge"><i class="fa-solid fa-circle" style="font-size: 0.5rem;"></i> Active</div>
+                </div>
+                <p class="coin-desc">High-speed blockchain assets processed smoothly with zero friction.</p>
+                <div class="card-actions">
+                    <a href="https://wa.me/2348022802004?text=Hello,%20I%20want%20to%20trade" target="_blank" class="btn-card-action btn-card-wa">
+                        <i class="fa-brands fa-whatsapp"></i> Trade on WhatsApp
+                    </a>
+                    <a href="https://t.me/One_MinuteTrade" target="_blank" class="btn-card-action btn-card-tg">
+                        <i class="fa-brands fa-telegram"></i> Trade on Telegram
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- OTHER CURRENCIES GENERAL BANNER -->
+        <div class="other-currencies-banner">
+            <div class="banner-content">
+                <h3>Got Other Coins or Tokens?</h3>
+                <p>We accept all other major altcoins and tokens. Reach out to our desk for an instant quote.</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <a href="https://wa.me/2348022802004?text=Hello,%20I%20want%20to%20trade" target="_blank" class="btn-card-action btn-card-wa" style="padding: 10px 20px;">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Desk
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE RATES REFERENCE BOX -->
+    <section id="rates" class="rates-ref-section">
+        <div class="ref-inner">
+            <div class="ref-left">
+                <i class="fa-solid fa-circle-info"></i>
+                <p><strong>Live Rate Reference:</strong> Exchange rates update dynamically based on current market benchmarks.</p>
+            </div>
+            <div class="ref-rates-display">
+                Sell Price: ₦1,380 / $ &nbsp;|&nbsp; Buy Price: ₦1,385 / $
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section id="why-us" class="features-section">
+        <div class="features-wrapper">
+            <div class="section-header" style="text-align: center;">
+                <h2>Why Trade With 1 Minute Trade?</h2>
+                <p>Designed for absolute peace of mind and lightning-fast execution.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon-box"><i class="fa-solid fa-bolt"></i></div>
+                    <h4>Lightning Fast Payouts</h4>
+                    <p>Once your coin transfer is confirmed on the network, your bank alert drops in 60 seconds.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon-box"><i class="fa-solid fa-shield-check"></i></div>
+                    <h4>Trusted OTC Desk</h4>
+                    <p>Over $10M+ processed cleanly with a stellar reputation and zero customer complaints.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon-box"><i class="fa-solid fa-headset"></i></div>
+                    <h4>Human Support 24/7</h4>
+                    <p>No bots or confusing loops—speak directly with professional trade reps ready to assist you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & FOOTER SECTION -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h5 style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 28px; height: 28px; background: var(--primary-blue); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 800;">1M</div>
+                    1 Minute Trade
+                </h5>
+                <p style="margin-bottom: 15px; color: var(--text-muted);">Your most reliable and confidential over-the-counter digital asset exchange platform.</p>
+                <p><i class="fa-solid fa-globe"></i> oneminutetrade.org</p>
+            </div>
+
+            <div class="footer-col">
+                <h5>Contact Details</h5>
+                <p><i class="fa-solid fa-location-dot"></i> Lagos, Nigeria</p>
+                <p><i class="fa-solid fa-phone"></i> 08022802004</p>
+                <p><i class="fa-solid fa-phone"></i> 08064056455</p>
+                <p><i class="fa-brands fa-whatsapp"></i> +234 802 280 2004</p>
+            </div>
+
+            <div class="footer-col">
+                <h5>Connect on Socials</h5>
+                <p>Follow our official channels for market updates and announcements.</p>
+                <div class="social-icons-group">
+                    <!-- EDIT HERE: Add your social media links inside the href="#" attribute -->
+                    <a href="#" target="_blank" class="social-icon-btn" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" class="social-icon-btn" title="Twitter / X"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" target="_blank" class="social-icon-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://t.me/One_MinuteTrade" target="_blank" class="social-icon-btn" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright-bar">
+            <p>&copy; 2026 1 Minute Trade (oneminutetrade.org). All rights reserved.</p>
+            <p>Built for speed and absolute reliability.</p>
+        </div>
+    </footer>
+
+    <!-- SIMPLE JAVASCRIPT FOR MOBILE MENU TOGGLE -->
+    <script>
+        const hamburgerToggle = document.getElementById('hamburgerToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        // Toggle mobile dropdown when hamburger is clicked
+        hamburgerToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Automatically close menu when a user clicks a link
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
