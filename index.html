@@ -246,6 +246,21 @@
             z-index: 1;
             animation: fadeInUp 0.8s ease-out;
         }
+        /* Background Watermark Styling */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 380px;
+    height: 380px;
+    background: url('logo.png') no-repeat center center;
+    background-size: contain;
+    opacity: 0.05; /* Keeps it faint & luxurious */
+    pointer-events: none;
+    z-index: 0;
+}
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -831,9 +846,9 @@
     <!-- STICKY HEADER -->
     <header>
         <a href="#home" class="logo-container">
-            <div class="logo-icon-box">
-                1M
-            </div>
+            <div class="logo-icon-box" style="background: transparent; box-shadow: none;">
+    <img src="logo.png" alt="1 Minute Trade Logo" style="width: 100%; height: 100%; object-fit: contain;">
+</div>
             <div class="logo-text">
                 1 MINUTE <span>TRADE</span>
             </div>
